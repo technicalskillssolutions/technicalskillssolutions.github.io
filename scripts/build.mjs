@@ -88,6 +88,10 @@ const importMap = {
   }
 };
 
+// Monetag In-Page Push Advertisement.
+// Loaded on all generated website pages.
+const monetagAdScript = `<script>(function(s){s.dataset.zone='12215438',s.src='https://nap5k.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>`;
+
 async function writePage(key, markup, metaOverride = {}) {
   const meta = { ...(pageMeta[key] || {}), ...metaOverride };
 
@@ -108,7 +112,7 @@ async function writePage(key, markup, metaOverride = {}) {
     ? '<meta name="taimads-site-verification" content="taimads-ab75d5879c3f4777b126d9a8fbf2f3f3">'
     : '';
 
-  const html = `<!doctype html><html lang="en-IN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="color-scheme" content="dark light"><meta name="theme-color" content="#081426"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="keywords" content="${esc(keywords)}"><meta name="author" content="Technical Skills Solutions">${verificationMeta}<meta name="robots" content="${esc(meta.robots || 'index,follow')}"><link rel="canonical" href="${esc(url)}"><link rel="icon" href="${basePath}/images/logo.svg" type="image/svg+xml"><link rel="manifest" href="${basePath}/manifest.webmanifest"><meta property="og:type" content="website"><meta property="og:site_name" content="Technical Skills Solutions"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${esc(url)}"><meta property="og:image" content="${siteOrigin}${basePath}/images/og-default.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(description)}"><meta name="twitter:image" content="${siteOrigin}${basePath}/images/og-default.png"><link rel="stylesheet" href="${basePath}/css/style.css"><script type="importmap">${JSON.stringify(importMap)}</script><script type="module" src="${basePath}/scripts/site.js"></script></head><body><div id="app">${markup}</div></body></html>`;
+  const html = `<!doctype html><html lang="en-IN"><head>${monetagAdScript}<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="color-scheme" content="dark light"><meta name="theme-color" content="#081426"><title>${esc(title)}</title><meta name="description" content="${esc(description)}"><meta name="keywords" content="${esc(keywords)}"><meta name="author" content="Technical Skills Solutions">${verificationMeta}<meta name="robots" content="${esc(meta.robots || 'index,follow')}"><link rel="canonical" href="${esc(url)}"><link rel="icon" href="${basePath}/images/logo.svg" type="image/svg+xml"><link rel="manifest" href="${basePath}/manifest.webmanifest"><meta property="og:type" content="website"><meta property="og:site_name" content="Technical Skills Solutions"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(description)}"><meta property="og:url" content="${esc(url)}"><meta property="og:image" content="${siteOrigin}${basePath}/images/og-default.png"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(description)}"><meta name="twitter:image" content="${siteOrigin}${basePath}/images/og-default.png"><link rel="stylesheet" href="${basePath}/css/style.css"><script type="importmap">${JSON.stringify(importMap)}</script><script type="module" src="${basePath}/scripts/site.js"></script></head><body><div id="app">${markup}</div></body></html>`;
 
   const route = meta.path || routeMap[key] || '/';
 
